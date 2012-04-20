@@ -1,31 +1,5 @@
-SpaceState
-==========
+SpaceApi
+========
 
-"Koen Martens" <gmc@hackerspaces.nl>
+Canonical repository for the SpaceState API.
 
-https://market.android.com/details?id=com.sonologic.spacestatus
-
-Android app and widget showing spacestatus by retrieving json objects
-that are formatted according to the hackerspaces.nl SpaceAPI (which
-can be found on https://hackerspaces.nl/spaceapi/).
-
-ToDo
-====
-
-- Working on importing the space status directory, and let users choose
-  which space to follow
-- Multiple widgets for different spaces
-- Visual appealing sauce
-- Show logo's and other details from the json object 
-
-Changelog
-=========
-
-v1.2:
-- persistent preferences
-- app launches when widget is tapped
-- show when space status changed
-v1.1:
-- add slider to set update frequency
-- add 'force update' button
-- force update when activity becomes visible
