@@ -27,6 +27,7 @@ $dir=  array(
 	  'Hack42' => 'http://hack42.nl/spacestate/json.php',
 	  'Garoa Hacker Clube' => 'https://garoahc.appspot.com/status',
 	  'Beta-Space' => 'http://status.kreativitaet-trifft-technik.de/status.json',
+	  'Farset Labs' => 'http://unit1.farsetlabs.org.uk/spaceapi/space',
 	);
 
 if(isset($_GET['fmt']) && $_GET['fmt']=='a') {
