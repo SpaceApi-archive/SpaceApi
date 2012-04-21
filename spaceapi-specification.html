@@ -25,7 +25,7 @@
 <h2>Status object</h2>
 <p>The JSON object has these fields:
 <ul>
-	<li>api (string, mandatory) - '0.12'</li>
+	<li>api (string, mandatory) - '0.13'</li>
 	<li>space (string, mandatory) - name of the hackerspace;</li>
 	<li>logo (string, mandatory) - url to a png, jpg or gif image;</li>
 	<li>icon (array, mandatory) - provides url's to 2 icons to use to depict 'open' and 'closed' status:</li>
@@ -39,7 +39,7 @@
 <ul>
 	<li>phone (string, optional) - phone number (in the form of +CCNNNNNNNNN, where CC is the countrycode);</li>
 	<li>sip (string, optional) - sip uri (eg. 'sip:gmc@pbx.sonologic.net'</li>
-	<li>keymaster (string or array of strings, optional) - phone number, or phone numbers of people able to open the space (for spaces where not all members can unlock the door</li>
+	<li>keymaster (array of strings or empty array, optional) - phone number, or phone numbers of people able to open the space (for spaces where not all members can unlock the door</li>
 	<li>irc (string, optional) - irc channel in the form of 'irc://freenode/#revspace';</li>
 	<li>twitter (string, optional) - twitter account in the form of '@brenno';</li>
 	<li>email (string, optional) - general email address;</li>
@@ -64,10 +64,38 @@
 	<li>extra (string, optional) - additional information</li>
 </ul>
 </ul>
-	<li>sensors (array of arrays, optional) - indexed by sensor type, where the following types have been defined explicitly:
+	<li>sensors (objectmap, optional) - indexed by sensor type, where the following types have been defined explicitly:
 		<ul>
-			<li>temp (array of strings) - strings indexed by a mnemonic identifier, the string value should match the regular expression ^[-+]?[0-9]+(.[0-9]+)?[FCK]$</li>
-			<li>additional sensor types may be defined by the implementor, implementor is requested to share the definition for inclusion in this specification</li>
+			<li>temperature (array of objects, optional)</li>
+				<ul>
+					<li>name (string, mandatory) - a name for the sensor</li>
+					<li>value (float, mandatory) - the actual value</li>
+					<li>unit (string, mandatory) - the values unit</li>
+				</ul>
+			<li>humidity (array of objects, optional)</li>
+				<ul>
+					<li>name (string, mandatory) - a name for the sensor</li>
+					<li>value (float, mandatory) - the actual value</li>
+				</ul>
+			<li>barometer (array of objects, optional)</li>
+				<ul>
+					<li>name (string, mandatory) - a name for the sensor</li>
+					<li>value (float, mandatory) - the actual value</li>
+					<li>unit (string, mandatory) - the values unit</li>
+				</ul>
+			<li>wind (array of objects, optional)</li>
+				<ul>
+					<li>name (string, mandatory) - a name for the sensor</li>
+					<li>speed (float, mandatory) - the current windi speed</li>
+					<li>gust (float, optional) - peak gust</li>
+					<li>unit (string, mandatory) - the values unit</li>
+					<li>direction (string, optional) - the wind direction</li>
+				</ul>
+			<li>wifi (array of objects, optional)</li>
+				<ul>
+					<li>name (string, mandatory) - name of the accesspoint</li>
+					<li>connections (int, mandatory) - how many connections are open</li>
+				</ul>
 		</ul>
 	</li>
 	<li>feeds (array of objects, optional) - one or more feeds (rss, atom, ical, ..), where each entry has the following fields:
@@ -81,12 +109,12 @@
 </p><p>
 An example (and fictional) JSON object implementing all of the above mandatory fields and a number of optional fields:
 <pre>{
-  "api":"0.12",
+  "api":"0.13",
   "space":"RevSpace",
   "url":"https:\/\/revspace.nl",
   "icon":{
-    "open":"https://revspace.nl/icon/open.png",
-    "closed":"https://revspace.nl/icon/closed.png"
+    "open":"https:\/\/revspace.nl\/icon\/open.png",
+    "closed":"https:\/\/revspace.nl\/icon\/closed.png"
   },
   "address":"Binckhorstlaan 172, 2595 BT Den Haag, The Netherlands",
   "contact":{
@@ -98,9 +126,13 @@ An example (and fictional) JSON object implementing all of the above mandatory f
   "logo":"https:\/\/revspace.nl\/mediawiki\/RevspaceLogoOnGreen.png",
   "open":true,
   "lastchange":1320586506,
-  "sensors":[
-    {"temp":{"hacklab":"8.5C","handwerklokaal":"20.5C","lounge":"7.5C"}}
-  ],
+  "sensors":{
+    "temperature":[{"name":"outside", "value":10.3, "unit":"C"}, {"name":"inside", "value":20.2, "unit":"C"}],
+    "humidity":[{"name":"inside", "value":0.75}],
+    "barometer":[{"name":"outside", "value":1030.8,  "unit":"hPA"}],
+    "wind":[{"name":"outside", "speed":0.3, "gust": 1, "unit":"m/s", "direction":"SE"}],
+    "wifi":[{"name":"freifunk", "connections":8}]
+  },
   "feeds":[
     {"name":"blog","type":"application/rss+xml","url":"https://revspace.nl/blog.rss"},
     {"name":"calendar","type":"text/calendar","url":"https://revspace.nl/revspace.ical"}
@@ -127,6 +159,9 @@ r0.13:
 - added validator
 - add lat/lon floats to example
 - add link to new git location
+- escaping all urls https://github.com/SpaceApi/SpaceApi/issues/4
+- changed the sensor field https://github.com/SpaceApi/SpaceApi/issues/6
+- changed the keymaster field https://github.com/SpaceApi/SpaceApi/issues/7
 r0.12:
 - added firefox extension
 - added /status.json (https://github.com/sonologic/SpaceState/issues/1)
