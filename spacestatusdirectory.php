@@ -30,6 +30,7 @@ $dir=  array(
 	  'Farset Labs' => 'http://unit1.farsetlabs.org.uk/spaceapi/space',
 	  'Make, Hack, Void Canberra' => 'http://space.makehackvoid.com/status',
 	  'FIXME Hackerspace' => 'https://fixme.ch/cgi-bin/spaceapi.py',
+	  'TechInc' => 'https://techinc.nl/space/spacestate.json',
 	);
 
 if(isset($_GET['fmt']) && $_GET['fmt']=='a') {
