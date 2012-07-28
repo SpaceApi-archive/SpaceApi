@@ -15,7 +15,7 @@ $dir=  array(
 	  'ACKspace' => 'https://ackspace.nl/status.php',
 	  'Milwaukee Makerspace' => 'http://apps.2xlnetworks.net/milwaukeemakerspace/',
 	  'Noisebridge' => 'http://api.noisebridge.net/spaceapi/',
-	  'Pumping Station: One' => 'http://space.pumpingstationone.org:8000/spaceapi/ps1',
+	  'Pumping Station: One' => 'http://spacemon.pumpingstationone.org:8000/spaceapi/ps1',
 	  'Void Warranties' => 'http://we.voidwarranties.be/SpaceAPI/',
 	  'Makers Local 256' => 'https://256.makerslocal.org/status.json',
 	  'HeatSync Labs' => 'http://intranet.heatsynclabs.org/~access/cgi-bin/spaceapi.rb',
@@ -30,6 +30,7 @@ $dir=  array(
 	  'Farset Labs' => 'http://unit1.farsetlabs.org.uk/spaceapi/space',
 	  'Make, Hack, Void Canberra' => 'http://space.makehackvoid.com/status',
 	  'FIXME Hackerspace' => 'https://fixme.ch/cgi-bin/spaceapi.py',
+	  'TechInc' => 'https://techinc.nl/space/spacestate.json',
 	);
 
 if(isset($_GET['fmt']) && $_GET['fmt']=='a') {
