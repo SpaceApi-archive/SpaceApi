@@ -54,16 +54,24 @@
 	<li>open (boolean, mandatory) - 'true' if the space is currently open, 'false' if not;</li>
 	<li>status (string, optional) - additional free-form string to specify the 'open' status (ie, 'open for public', 'members only', ...)</li>
 	<li>lastchange (long int, optional) - seconds since epoch of last change in the open field;</li>
+	<li>users (array, optional) - array of currently checked-in users</li>
+		<ul>
+			<li>Each entry in the users array contains the following fields:</li>
+			<ul>
+				<li>name (string, mandatory) - name or nickname of persons currently in the vicinity of the space.</li>
+				<li>t (long int, mandatory) - time of login</li>
+			</ul>
+		</ul>
 	<li>events (array, optional) - array of recent check-in/check-outs or other relevant events the space wants to share (such as the fire-alarm).</li>
-<ul>
-	<li>Each entry in the events array has the following fields:</li>
-<ul>
-	<li>name (string, mandatory) - name or nickname of person or object associated with this event;</li>
-	<li>type (string, mandatory) - 'check-in' or 'check-out' (other values may be specified, but receivers of the object are not obligated to be able to understand these)</li>
-	<li>t (long int, mandatory) - time since the epoch for this event</li>
-	<li>extra (string, optional) - additional information</li>
-</ul>
-</ul>
+		<ul>
+			<li>Each entry in the events array has the following fields:</li>
+		<ul>
+			<li>name (string, mandatory) - name or nickname of person or object associated with this event;</li>
+			<li>type (string, mandatory) - 'check-in' or 'check-out' (other values may be specified, but receivers of the object are not obligated to be able to understand these)</li>
+			<li>t (long int, mandatory) - time since the epoch for this event</li>
+			<li>extra (string, optional) - additional information</li>
+		</ul>
+		</ul>
 	<li>sensors (objectmap, optional) - indexed by sensor type, where the following types have been defined explicitly:
 		<ul>
 			<li>temperature (array of objects, optional)</li>
