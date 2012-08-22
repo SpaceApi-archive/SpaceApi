@@ -31,6 +31,7 @@ $dir=  array(
 	  'Make, Hack, Void Canberra' => 'http://space.makehackvoid.com/status',
 	  'FIXME Hackerspace' => 'https://fixme.ch/cgi-bin/spaceapi.py',
 	  'TechInc' => 'https://techinc.nl/space/spacestate.json',
+	  'Stratum 0' => 'http://status.stratum0.org/status.json'
 	);
 
 if(isset($_GET['fmt']) && $_GET['fmt']=='a') {
