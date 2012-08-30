@@ -23,6 +23,9 @@ mailman](http://lists.hackerspaces.org/mailman/listinfo/spaceapi-devel) so
 that we can discuss your changes. When you are ready to integrate them, please
 open a pull request pointed towards the devel branch.
 
+Please do not adjust the changelog or API version tag; we will change this
+when we tag put out a new release.
+
 Adding your space to the directory
 ----------------------------------
 
