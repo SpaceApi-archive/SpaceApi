@@ -1,0 +1,188 @@
+HackerSpace Status API - rel0.13-rc1
+====================================
+
+This document and any discussion relating to it is maintained at [the SpaceApi
+github repository](https://github.com/SpaceApi).
+
+The HackerSpace Status API proposes a unified syntax to publish information
+about a hackerspace for consumption by javascript widgets, mobile apps and
+other scripts or programs. The API is flexible, and allows for custom
+extensions.
+
+The API is based on JSON, and defines the properties of the space status JSON
+object. In this specification, some fields are mandatory, whereas others are
+optional. A hackerspace implementing this API should at least provide the
+mandatory fields.
+
+A spacestate json endpoint can be checked for validity against this
+specification by using [Slopjong's spaceapi
+validator](http://openspace.slopjong.de/).
+
+Receivers of the object must be able to parse all mandatory fields, and may
+interpret the optional fields. The receiver may also choose to ignore optional
+fields.
+
+In addition to the fields defined below, a publisher is free to add any custom
+fields. It is recommended to start the field-names of custom fields with the
+string 'ext\_', to make it clear the field is not part of the documented API.
+Consumers are not obligated to interpret any custom fields.
+
+Hosting considerations
+----------------------
+
+In order to be able to retrieve the object from within a javascript sandbox,
+the server of the JSON object should set the 'Access-Control-Allow-Origin'
+header with a value of '\*'. Additionally, it might be beneficial to add a
+'Cache-Control' header with a value of 'no-cache', to prevent browser caches
+from retaining old data.
+
+Implementors of this specification may provide a discovery tag on the main
+page of their website, as such:
+
+    <link rel="space-api" href="https://revspace.nl/status/status.php" />
+
+Spaces implementing this specification should by default provide the json
+string as the file /status.json in the root of their main website. For
+example: https://revspace.nl/status.json. If a discovery tag is present, this
+overrides the default location specified in this paragraph.
+
+### Space directory #
+
+The space status directory can be found on:
+
+[http://chasmcity.sonologic.nl/spacestatusdirectory.php](http://chasmcity.sonologic.nl/spacestatusdirectory.php)
+
+To be included in this directory, please email the author of this document
+with your URL.
+
+Status object
+-------------
+
+The JSON object has these fields:
+
+* api (string, mandatory) - '0.12'
+* space (string, mandatory) - name of the hackerspace;
+* logo (string, mandatory) - url to a png, jpg or gif image;
+* icon (array, mandatory) - provides url's to 2 icons to use to depict 'open' and 'closed' status:
+  * open (string, mandatory): url to a square png file with a max resolution of 100x100 pixels;
+  * closed (string, mandatory): url to a square png file with a max resolution of 100x100 pixels;
+* url (string, mandatory) - url to the hackerspace homepage;
+* address (string, optional) - visiting address;
+* contact (object, optional) - has the following subfields:
+  * phone (string, optional) - phone number (in the form of +CCNNNNNNNNN, where CC is the countrycode);
+  * sip (string, optional) - sip uri (eg. 'sip:gmc@pbx.sonologic.net'
+  * keymaster (string or array of strings, optional) - phone number, or phone numbers of people able to open the space (for spaces where not all members can unlock the door
+  * irc (string, optional) - irc channel in the form of 'irc://freenode/#revspace';
+  * twitter (string, optional) - twitter account in the form of '@brenno';
+  * email (string, optional) - general email address;
+  * ml (string, optional) - public mailing list address;
+  * jabber (string, optional) - jabber chatbox;
+  * .... - additional fields may be added if needed (but please let the author know, so it can be added to the spec in order to achieve consistency across implementations).
+* lat (float, optional) - latitude
+* lon (float, optional) - longitude
+* cam (array of strings, optional) - webcam url(s);
+* stream (array, optional) - object indexed by stream type with url to stream as value (eg { 'mp4':'http\/\/etc...','mjpg':'....'})
+* open (boolean, mandatory) - 'true' if the space is currently open, 'false' if not;
+* status (string, optional) - additional free-form string to specify the 'open' status (ie, 'open for public', 'members only', ...)
+* lastchange (long int, optional) - seconds since epoch of last change in the open field;
+* events (array, optional) - array of recent check-in/check-outs or other relevant events the space wants to share (such as the fire-alarm).
+  * Each entry in the events array has the following fields:
+    * name (string, mandatory) - name or nickname of person or object associated with this event;
+    * type (string, mandatory) - 'check-in' or 'check-out' (other values may be specified, but receivers of the object are not obligated to be able to understand these)
+    * t (long int, mandatory) - time since the epoch for this event
+    * extra (string, optional) - additional information
+* sensors (array of arrays, optional) - indexed by sensor type, where the following types have been defined explicitly:
+  * temp (array of strings) - strings indexed by a mnemonic identifier, the string value should match the regular expression ^[-+]?[0-9]+(.[0-9]+)?[FCK]$
+  * additional sensor types may be defined by the implementor, implementor is requested to share the definition for inclusion in this specification
+* feeds (array of objects, optional) - one or more feeds (rss, atom, ical, ..), where each entry has the following fields:
+  * name (string, mandatory) - mnemonic identifier (blog, news, calendar, ...)
+  * type (string, optional) - mime-type of the feed (implementors should not rely on auto-detection of their feed type and are advised to provide this optional field)
+  * url (string, mandatory) - url to the feed content
+* apis (objects, optional) - one or more space-hosted services (Door access control, space-usage statistics, ...)
+  * Each key is the unique type of the service as defined in the Service description, and each entry is an object that has the following fields:
+    * url (string, mandatory) - url pointing to the external resource
+    * documentation (string, mandatory) - url pointing to a human-readable documentation of the service
+
+An example (and fictional) JSON object implementing all of the above mandatory fields and a number of optional fields:
+
+    {
+      "api":"0.12",
+      "space":"RevSpace",
+      "url":"https:\/\/revspace.nl",
+      "icon":{
+        "open":"https://revspace.nl/icon/open.png",
+        "closed":"https://revspace.nl/icon/closed.png"
+      },
+      "address":"Binckhorstlaan 172, 2595 BT Den Haag, The Netherlands",
+      "contact":{
+        "phone":"+31702127681",
+        "twitter":"@revspacenl",
+        "ml":"general@revspace.nl"
+      },
+      "cam":"http:\/\/cam1.revspace.nl\/",
+      "logo":"https:\/\/revspace.nl\/mediawiki\/RevspaceLogoOnGreen.png",
+      "open":true,
+      "lastchange":1320586506,
+      "sensors":[
+        {"temp":{"hacklab":"8.5C","handwerklokaal":"20.5C","lounge":"7.5C"}}
+      ],
+      "feeds":[
+        {"name":"blog","type":"application/rss+xml","url":"https://revspace.nl/blog.rss"},
+        {"name":"calendar","type":"text/calendar","url":"https://revspace.nl/revspace.ical"}
+      ],
+      "events":[
+        {"name":"julian","type":"check-in","t":1320585844},
+        {"name":"zerocool","type":"check-in","t":1320536415},
+        {"name":"gmc","type":"check-in","t":1320534968},
+        {"name":"foobar","type":"check-in","t":1320528604}
+      ],
+      "lat":4.336982,
+      "lon":52.069826,
+      "apis": {
+        "oac-web": {
+          "url": "http://revspace.nl/access-control",
+          "description":"http://revspcae.nl/wiki/Oac-Web"
+        },
+        "pamela": {
+          "url": "http://revspace.nl/pamela/data.php",
+          "description":"http://0x20.be/Pamela"
+        }
+      }
+    }
+
+Applications
+============
+
+* [SpaceStatus](https://market.android.com/details?id=com.sonologic.spacestatus&amp;feature=search_result#?t=W251bGwsMSwxLDEsImNvbS5zb25vbG9naWMuc3BhY2VzdGF0dXMiXQ..) - android app, currently shows the status of RevSpace, next version will include a choice from the spaces in the directory service
+* [Web Dashboard](http://wilco.baanhofman.nl/station/spaces.html) - quickly implemented example of how to query and display space status from within the browser (ajax/JSON)
+* [Firefox add-on for your hackerspace door status](http://slopjong.de/2012/02/15/firefox-add-on-for-your-hackerspace-door-status/)
+* [Global hackerspaces wall](http://hackerspaces.me/wall)
+* [Android app that shows information from spaces in the directory.](https://play.google.com/store/apps/details?id=ws.narro.the.in.spacedirectory)
+
+Changelog
+=========
+
+### r0.13: #
+* added validator
+* add lat/lon floats to example
+* add link to new git location
+
+### r0.12: #
+* added firefox extension
+* added /status.json (https://github.com/sonologic/SpaceState/issues/1)
+* added discovery tag (https://github.com/sonologic/SpaceState/issues/2)
+* added sensor array (https://github.com/sonologic/SpaceState/issues/3)
+* added feed array (https://github.com/sonologic/SpaceState/issues/4)
+
+### r0.11: #
+* added 'icon' field
+
+### r0.9: #
+* added structured 'contact' field
+* moved phone no to 'contact' object
+
+### r0.8: #
+* add api version field (Stitch)
+* add optional status specification (Toba)
+* add implementation list (gmc)
+
