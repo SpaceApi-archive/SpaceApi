@@ -98,6 +98,10 @@ The JSON object has these fields:
   * name (string, mandatory) - mnemonic identifier (blog, news, calendar, ...)
   * type (string, optional) - mime-type of the feed (implementors should not rely on auto-detection of their feed type and are advised to provide this optional field)
   * url (string, mandatory) - url to the feed content
+* apis (objects, optional) - one or more space-hosted services (Door access control, space-usage statistics, ...)
+  * Each key is the unique type of the service as defined in the Service description, and each entry is an object that has the following fields:
+    * url (string, mandatory) - url pointing to the external resource
+    * documentation (string, mandatory) - url pointing to a human-readable documentation of the service
 
 An example (and fictional) JSON object implementing all of the above mandatory fields and a number of optional fields:
 
@@ -133,7 +137,17 @@ An example (and fictional) JSON object implementing all of the above mandatory f
         {"name":"foobar","type":"check-in","t":1320528604}
       ],
       "lat":4.336982,
-      "lon":52.069826
+      "lon":52.069826,
+      "apis": {
+        "oac-web": {
+          "url": "http://revspace.nl/access-control",
+          "description":"http://revspcae.nl/wiki/Oac-Web"
+        },
+        "pamela": {
+          "url": "http://revspace.nl/pamela/data.php",
+          "description":"http://0x20.be/Pamela"
+        }
+      }
     }
 
 Applications
