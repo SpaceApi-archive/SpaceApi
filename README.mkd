@@ -8,10 +8,10 @@ Branches
 
 There are two primary branches: master and devel
 
-``master'' is the "gold standard current API", the current stable API which spaces
+```master``` is the "gold standard current API", the current stable API which spaces
 should implement.
 
-``devel'' is the experimental branch where features and fixes are accrued
+```devel``` is the experimental branch where features and fixes are accrued
 between releases.
 
 Extending the API
