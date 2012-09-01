@@ -1,0 +1,40 @@
+SpaceApi
+========
+
+Canonical repository for the SpaceState API.
+
+Branches
+--------
+
+There are two primary branches: master and devel
+
+```master``` is the "gold standard current API", the current stable API which spaces
+should implement.
+
+```devel``` is the experimental branch where features and fixes are accrued
+between releases.
+
+Extending the API
+-----------------
+
+API extensions are welcome and encouraged! If you would like to propose an API
+extension, please contact our [mailing list on the hackerspaces.org
+mailman](http://lists.hackerspaces.org/mailman/listinfo/spaceapi-devel) so
+that we can discuss your changes. When you are ready to integrate them, please
+open a pull request pointed towards the devel branch.
+
+Please do not adjust the changelog or API version tag; we will change this
+when we tag put out a new release.
+
+Adding your space to the directory
+----------------------------------
+
+Edit ``spacestatusdirectory.php'' and add your space to the large list of spaces:
+
+```php
+  'TechInc' => 'https://techinc.nl/space/spacestate.json',
+```
+
+Commit this with a message along the lines of "Add FOOLABS to Space Directory"
+and pull request against the master branch.
+
