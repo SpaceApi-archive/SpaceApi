@@ -5,6 +5,7 @@ header("Cache-Control: max-age=300, public");
 header("Content-Type: application/json");
 
 $dir=  array(
+	  'Ace Monster Toys' => 'http://acemonstertoys.org/status.json',
 	  'RevSpace' => 'https://revspace.nl/status/status.php',
 	  'Bitlair' => 'https://bitlair.nl/statejson.php',
 	  'TkkrLab' => 'http://tkkrlab.nl/statejson.php',
