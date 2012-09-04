@@ -29,12 +29,7 @@ when we tag put out a new release.
 Adding your space to the directory
 ----------------------------------
 
-Edit ``spacestatusdirectory.php'' and add your space to the large list of spaces:
+Use the [OpenSpaceLint](http://openspace.slopjong.de) tool to add your space.
 
-```php
-  'TechInc' => 'https://techinc.nl/space/spacestate.json',
-```
-
-Commit this with a message along the lines of "Add FOOLABS to Space Directory"
-and pull request against the master branch.
+![add-new-space.png](OpenSpaceDirectory/raw/master/add-new-space.png)
 
