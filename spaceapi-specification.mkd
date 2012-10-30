@@ -104,7 +104,7 @@ An example (and fictional) JSON object implementing all of the above mandatory f
     {
       "api":"0.12",
       "space":"RevSpace",
-      "url":"https:\/\/revspace.nl",
+      "url":"https://revspace.nl",
       "icon":{
         "open":"https://revspace.nl/icon/open.png",
         "closed":"https://revspace.nl/icon/closed.png"
@@ -115,8 +115,8 @@ An example (and fictional) JSON object implementing all of the above mandatory f
         "twitter":"@revspacenl",
         "ml":"general@revspace.nl"
       },
-      "cam":"http:\/\/cam1.revspace.nl\/",
-      "logo":"https:\/\/revspace.nl\/mediawiki\/RevspaceLogoOnGreen.png",
+      "cam":"http://cam1.revspace.nl/",
+      "logo":"https://revspace.nl/mediawiki/RevspaceLogoOnGreen.png",
       "open":true,
       "lastchange":1320586506,
       "sensors":[
