@@ -93,6 +93,11 @@ The JSON object has these fields:
     * extra (string, optional) - additional information
 * sensors (array of arrays, optional) - indexed by sensor type, where the following types have been defined explicitly:
   * temp (array of strings) - strings indexed by a mnemonic identifier, the string value should match the regular expression ^[-+]?[0-9]+(.[0-9]+)?[FCK]$
+  * binary - Base64 encoded binary data
+  * string - Arbitrary string data
+  * number - Arbitrary numerical data. May be float or integer.
+  * json - Arbitrary JSON strucutres.
+  * boolean - Arbitrary boolean fields.
   * additional sensor types may be defined by the implementor, implementor is requested to share the definition for inclusion in this specification
 * feeds (array of objects, optional) - one or more feeds (rss, atom, ical, ..), where each entry has the following fields:
   * name (string, mandatory) - mnemonic identifier (blog, news, calendar, ...)
@@ -120,7 +125,11 @@ An example (and fictional) JSON object implementing all of the above mandatory f
       "open":true,
       "lastchange":1320586506,
       "sensors":[
-        {"temp":{"hacklab":"8.5C","handwerklokaal":"20.5C","lounge":"7.5C"}}
+        {"temp":{"hacklab":"8.5C","handwerklokaal":"20.5C","lounge":"7.5C"}},
+        {"boolean":{"front-door-closed":True}},
+        {"number":{"brightness":0.8}},
+        {"string":{"motd":"Welcome to the space!"}},
+        {"json":{"network-machines":[{"name":"macbook", "mac":"D3:3A:DB:EE:FF:00"}]}},
       ],
       "feeds":[
         {"name":"blog","type":"application/rss+xml","url":"https://revspace.nl/blog.rss"},
