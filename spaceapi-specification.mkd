@@ -63,9 +63,11 @@ The JSON object has these fields:
 * api (string, mandatory) - '0.12'
 * space (string, mandatory) - name of the hackerspace;
 * logo (string, mandatory) - url to a png, jpg or gif image;
-* icon (array, mandatory) - provides url's to 2 icons to use to depict 'open' and 'closed' status:
-  * open (string, mandatory): url to a square png file with a max resolution of 100x100 pixels;
-  * closed (string, mandatory): url to a square png file with a max resolution of 100x100 pixels;
+* status (map, mandatory) - information about the space's current state
+  * open (boolean, mandatory) - 'true' if the space is currently open, 'false' if not;
+  * text (string, optional) - additional free-form string to specify the 'open' status (ie, 'open for public', 'members only', ...)
+  * lastchange (long int, optional) - seconds since epoch of last change in the open field;
+  * icon - URL to an icon to use to depict the state
 * url (string, mandatory) - url to the hackerspace homepage;
 * address (string, optional) - visiting address;
 * contact (object, optional) - has the following subfields:
@@ -82,9 +84,6 @@ The JSON object has these fields:
 * lon (float, optional) - longitude
 * cam (array of strings, optional) - webcam url(s);
 * stream (array, optional) - object indexed by stream type with url to stream as value (eg { 'mp4':'http\/\/etc...','mjpg':'....'})
-* open (boolean, mandatory) - 'true' if the space is currently open, 'false' if not;
-* status (string, optional) - additional free-form string to specify the 'open' status (ie, 'open for public', 'members only', ...)
-* lastchange (long int, optional) - seconds since epoch of last change in the open field;
 * events (array, optional) - array of recent check-in/check-outs or other relevant events the space wants to share (such as the fire-alarm).
   * Each entry in the events array has the following fields:
     * name (string, mandatory) - name or nickname of person or object associated with this event;
