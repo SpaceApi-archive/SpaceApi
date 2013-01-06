@@ -77,11 +77,9 @@ The JSON object has these fields:
   * email (string, optional) - general email address;
   * ml (string, optional) - public mailing list address;
   * jabber (string, optional) - jabber chatbox;
+  * lat (float, optional) - latitude
+  * lon (float, optional) - longitude
   * .... - additional fields may be added if needed (but please let the author know, so it can be added to the spec in order to achieve consistency across implementations).
-* lat (float, optional) - latitude
-* lon (float, optional) - longitude
-* cam (array of strings, optional) - webcam url(s);
-* stream (array, optional) - object indexed by stream type with url to stream as value (eg { 'mp4':'http\/\/etc...','mjpg':'....'})
 * open (boolean, mandatory) - 'true' if the space is currently open, 'false' if not;
 * status (string, optional) - additional free-form string to specify the 'open' status (ie, 'open for public', 'members only', ...)
 * lastchange (long int, optional) - seconds since epoch of last change in the open field;
@@ -93,6 +91,8 @@ The JSON object has these fields:
     * extra (string, optional) - additional information
 * sensors (array of arrays, optional) - indexed by sensor type, where the following types have been defined explicitly:
   * temp (array of strings) - strings indexed by a mnemonic identifier, the string value should match the regular expression ^[-+]?[0-9]+(.[0-9]+)?[FCK]$
+  * cam (array of strings) - a list of webcam URLs
+  * stream (array of strings) - a list of media streams
   * additional sensor types may be defined by the implementor, implementor is requested to share the definition for inclusion in this specification
 * feeds (array of objects, optional) - one or more feeds (rss, atom, ical, ..), where each entry has the following fields:
   * name (string, mandatory) - mnemonic identifier (blog, news, calendar, ...)
