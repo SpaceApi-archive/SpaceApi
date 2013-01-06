@@ -91,7 +91,7 @@ The JSON object has these fields:
     * type (string, mandatory) - 'check-in' or 'check-out' (other values may be specified, but receivers of the object are not obligated to be able to understand these)
     * t (long int, mandatory) - time since the epoch for this event
     * extra (string, optional) - additional information
-* sensors (array of arrays, optional) - indexed by sensor type, where the following types have been defined explicitly:
+* sensors (map of maps, optional) - indexed by sensor type, where the following types have been defined explicitly:
   * temp (array of strings) - strings indexed by a mnemonic identifier, the string value should match the regular expression ^[-+]?[0-9]+(.[0-9]+)?[FCK]$
   * additional sensor types may be defined by the implementor, implementor is requested to share the definition for inclusion in this specification
 * feeds (array of objects, optional) - one or more feeds (rss, atom, ical, ..), where each entry has the following fields:
@@ -119,9 +119,9 @@ An example (and fictional) JSON object implementing all of the above mandatory f
       "logo":"https:\/\/revspace.nl\/mediawiki\/RevspaceLogoOnGreen.png",
       "open":true,
       "lastchange":1320586506,
-      "sensors":[
-        {"temp":{"hacklab":"8.5C","handwerklokaal":"20.5C","lounge":"7.5C"}}
-      ],
+      "sensors":{
+        "temp":{"hacklab":"8.5C","handwerklokaal":"20.5C","lounge":"7.5C"}
+      },
       "feeds":[
         {"name":"blog","type":"application/rss+xml","url":"https://revspace.nl/blog.rss"},
         {"name":"calendar","type":"text/calendar","url":"https://revspace.nl/revspace.ical"}
