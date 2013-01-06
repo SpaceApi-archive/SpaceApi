@@ -67,8 +67,8 @@ The JSON object has these fields:
   * open (string, mandatory): url to a square png file with a max resolution of 100x100 pixels;
   * closed (string, mandatory): url to a square png file with a max resolution of 100x100 pixels;
 * url (string, mandatory) - url to the hackerspace homepage;
-* address (string, optional) - visiting address;
 * contact (object, optional) - has the following subfields:
+  * address (string, optional) - visiting address;
   * phone (string, optional) - phone number (in the form of +CCNNNNNNNNN, where CC is the countrycode);
   * sip (string, optional) - sip uri (eg. 'sip:gmc@pbx.sonologic.net'
   * keymaster (string or array of strings, optional) - phone number, or phone numbers of people able to open the space (for spaces where not all members can unlock the door
