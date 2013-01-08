@@ -36,14 +36,53 @@ header with a value of '\*'. Additionally, it might be beneficial to add a
 'Cache-Control' header with a value of 'no-cache', to prevent browser caches
 from retaining old data.
 
-Implementors of this specification may provide a discovery tag on the main
+### Discovery Mechanisms #
+
+Implementors of this specification may provide a discovery tag on the root
 page of their website, as such:
 
     <link rel="space-api" href="https://revspace.nl/status/status.php" />
 
+Additionally, a SRV record may be added for DNS-SD.
+
+In the case of HTTPS:
+
+    default._spaceapis._tcp IN SRV 1 10 443 revspace.nl.
+    default._spaceapis._tcp IN TXT path=/status/status.php
+
+For boring HTTP:
+
+    default._spaceapi._tcp IN SRV 1 10 80 revspace.nl
+    default._spaceapi._tcp IN TXT path=/status/status.php
+
+One, the other, or both may be specified. Clients are RECOMMENDED to try HTTPS first.
+
+When multiple entries are advertised on a network, clients are RECOMMENDED to query for
+default._spaceapi._tcp.DnsDomainName to determine the local SpaceAPI endpoint.
+
+For a machine with the hostname "kiosk.space.synhak.org", it should query
+default._spaceapi._tcp.space.synhak.org.
+
+The above is not a complete configuration of DNS-SD. Additional records may be required:
+
+    b._dns-sd._udp IN PTR revspace.nl
+    lb._dns-sd._udp IN PTR revspace.nl
+    _spaceapis._tcp IN PTR default._spaceapis._tcp.revspace.nl
+    _spaceapi._tcp IN PTR default._spaceapi._tcp.revspace.nl
+
+More documentation is available at http://www.dns-sd.org/ServerStaticSetup.html
+Refer to the documentation for your DNS server for implementation details.
+
+For those using /.well-known/host-meta:
+
+    <Link>
+        <Rel>spaceapi</Rel>
+        <URI>https://revspace.nl/status/status.php</URL>
+    <Link>
+
 Spaces implementing this specification should by default provide the json
 string as the file /status.json in the root of their main website. For
-example: https://revspace.nl/status.json. If a discovery tag is present, this
+example: https://revspace.nl/status.json. If a discovery mechanism is present, this
 overrides the default location specified in this paragraph.
 
 ### Space directory #
