@@ -47,15 +47,31 @@ Additionally, a SRV record may be added for DNS-SD.
 
 In the case of HTTPS:
 
-    _spaceapis._tcp SRV 1 10 443 revspace.nl.
-    _spaceapis._tcp TXT path=/status/status.php
+    default._spaceapis._tcp IN SRV 1 10 443 revspace.nl.
+    default._spaceapis._tcp IN TXT path=/status/status.php
 
 For boring HTTP:
 
-    _spaceapi._tcp SRV 1 10 80 revspace.nl
-    _spaceapi._tcp TXT path=/status/status.php
+    default._spaceapi._tcp IN SRV 1 10 80 revspace.nl
+    default._spaceapi._tcp IN TXT path=/status/status.php
 
 One, the other, or both may be specified. Clients are RECOMMENDED to try HTTPS first.
+
+When multiple entries are advertised on a network, clients are RECOMMENDED to query for
+default._spaceapi._tcp.DnsDomainName to determine the local SpaceAPI endpoint.
+
+For a machine with the hostname "kiosk.space.synhak.org", it should query
+default._spaceapi._tcp.space.synhak.org.
+
+The above is not a complete configuration of DNS-SD. Additional records may be required:
+
+    b._dns-sd._udp IN PTR revspace.nl
+    lb._dns-sd._udp IN PTR revspace.nl
+    _spaceapis._tcp IN PTR default._spaceapis._tcp.revspace.nl
+    _spaceapi._tcp IN PTR default._spaceapi._tcp.revspace.nl
+
+More documentation is available at http://www.dns-sd.org/ServerStaticSetup.html
+Refer to the documentation for your DNS server for implementation details.
 
 For those using /.well-known/host-meta:
 
