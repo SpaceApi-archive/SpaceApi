@@ -96,7 +96,6 @@ The JSON object has these fields:
   * additional sensor types may be defined by the implementor, implementor is requested to share the definition for inclusion in this specification
 * feeds (array of objects, optional) - one or more feeds (rss, atom, ical, ..), where each entry has the following fields:
   * name (string, mandatory) - mnemonic identifier (blog, news, calendar, ...)
-  * type (string, optional) - mime-type of the feed (implementors should not rely on auto-detection of their feed type and are advised to provide this optional field)
   * url (string, mandatory) - url to the feed content
 
 An example (and fictional) JSON object implementing all of the above mandatory fields and a number of optional fields:
@@ -123,8 +122,8 @@ An example (and fictional) JSON object implementing all of the above mandatory f
         {"temp":{"hacklab":"8.5C","handwerklokaal":"20.5C","lounge":"7.5C"}}
       ],
       "feeds":[
-        {"name":"blog","type":"application/rss+xml","url":"https://revspace.nl/blog.rss"},
-        {"name":"calendar","type":"text/calendar","url":"https://revspace.nl/revspace.ical"}
+        {"name":"blog","url":"https://revspace.nl/blog.rss"},
+        {"name":"calendar","url":"https://revspace.nl/revspace.ical"}
       ],
       "events":[
         {"name":"julian","type":"check-in","t":1320585844},
