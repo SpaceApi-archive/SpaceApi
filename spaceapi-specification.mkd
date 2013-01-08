@@ -24,7 +24,7 @@ fields.
 
 In addition to the fields defined below, a publisher is free to add any custom
 fields. It is recommended to start the field-names of custom fields with the
-string 'ext\_', to make it clear the field is not part of the documented API.
+string 'x-', to make it clear the field is not part of the documented API.
 Consumers are not obligated to interpret any custom fields.
 
 Hosting considerations
