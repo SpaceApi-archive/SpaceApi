@@ -74,6 +74,7 @@ The JSON object has these fields:
   * keymaster (string or array of strings, optional) - phone number, or phone numbers of people able to open the space (for spaces where not all members can unlock the door
   * irc (string, optional) - irc channel in the form of 'irc://freenode/#revspace';
   * twitter (string, optional) - twitter account in the form of '@brenno';
+  * facebook (string, optional) - facebook account in the form of 'example', would format to 'http://facebook.com/example' when url-ized;
   * email (string, optional) - general email address;
   * ml (string, optional) - public mailing list address;
   * jabber (string, optional) - jabber chatbox;
