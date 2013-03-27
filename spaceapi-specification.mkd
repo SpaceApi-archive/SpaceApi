@@ -87,6 +87,7 @@ The JSON object has these fields:
 * open (boolean, mandatory) - 'true' if the space is currently open, 'false' if not;
 * status (string, optional) - additional free-form string to specify the 'open' status (ie, 'open for public', 'members only', ...)
 * lastchange (long int, optional) - seconds since epoch of last change in the open field;
+* spacefed (boolean, optional) - is the space part of the [http://spacefed.net](federated wifi authentication)
 * events (array, optional) - array of recent check-in/check-outs or other relevant events the space wants to share (such as the fire-alarm).
   * Each entry in the events array has the following fields:
     * name (string, mandatory) - name or nickname of person or object associated with this event;
@@ -160,6 +161,7 @@ Changelog
 * added validator
 * add lat/lon floats to example
 * add link to new git location
+* added spacefed flag
 
 ### r0.12: #
 * added firefox extension
