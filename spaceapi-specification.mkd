@@ -60,7 +60,7 @@ Status object
 
 The JSON object has these fields:
 
-* api (string, mandatory) - '0.12'
+* api (string, mandatory) - '0.13'
 * space (string, mandatory) - name of the hackerspace;
 * logo (string, mandatory) - url to a png, jpg or gif image;
 * icon (array, mandatory) - provides url's to 2 icons to use to depict 'open' and 'closed' status:
@@ -68,7 +68,7 @@ The JSON object has these fields:
   * closed (string, mandatory): url to a square png file with a max resolution of 100x100 pixels;
 * url (string, mandatory) - url to the hackerspace homepage;
 * address (string, optional) - visiting address;
-* contact (object, optional) - has the following subfields:
+* contact (object, mandatory) - has the following subfields:
   * phone (string, optional) - phone number (in the form of +CCNNNNNNNNN, where CC is the countrycode);
   * sip (string, optional) - sip uri (eg. 'sip:gmc@pbx.sonologic.net'
   * keymaster (string or array of strings, optional) - phone number, or phone numbers of people able to open the space (for spaces where not all members can unlock the door
@@ -78,10 +78,12 @@ The JSON object has these fields:
   * ml (string, optional) - public mailing list address;
   * jabber (string, optional) - jabber chatbox;
   * .... - additional fields may be added if needed (but please let the author know, so it can be added to the spec in order to achieve consistency across implementations).
-* lat (float, optional) - latitude
-* lon (float, optional) - longitude
+* location (object, mandatory): Position data such as a postal address or geographic coordinates"
+  * lat (float, mandatory) - latitude
+  * lon (float, mandatory) - longitude
+  * address (string, optional) - street address of space
 * cam (array of strings, optional) - webcam url(s);
-* stream (array, optional) - object indexed by stream type with url to stream as value (eg { 'mp4':'http\/\/etc...','mjpg':'....'})
+* stream (array, optional) - object indexed by stream type with url to stream as value (eg { 'mp4':'http//example.com/...','mjpg':'....'})
 * open (boolean, mandatory) - 'true' if the space is currently open, 'false' if not;
 * status (string, optional) - additional free-form string to specify the 'open' status (ie, 'open for public', 'members only', ...)
 * lastchange (long int, optional) - seconds since epoch of last change in the open field;
@@ -89,7 +91,7 @@ The JSON object has these fields:
   * Each entry in the events array has the following fields:
     * name (string, mandatory) - name or nickname of person or object associated with this event;
     * type (string, mandatory) - 'check-in' or 'check-out' (other values may be specified, but receivers of the object are not obligated to be able to understand these)
-    * t (long int, mandatory) - time since the epoch for this event
+    * timestamp (long int, mandatory) - time since the epoch for this event
     * extra (string, optional) - additional information
 * sensors (array of arrays, optional) - indexed by sensor type, where the following types have been defined explicitly:
   * temp (array of strings) - strings indexed by a mnemonic identifier, the string value should match the regular expression ^[-+]?[0-9]+(.[0-9]+)?[FCK]$
@@ -102,9 +104,9 @@ The JSON object has these fields:
 An example (and fictional) JSON object implementing all of the above mandatory fields and a number of optional fields:
 
     {
-      "api":"0.12",
+      "api":"0.13",
       "space":"RevSpace",
-      "url":"https:\/\/revspace.nl",
+      "url":"https://revspace.nl",
       "icon":{
         "open":"https://revspace.nl/icon/open.png",
         "closed":"https://revspace.nl/icon/closed.png"
@@ -113,12 +115,16 @@ An example (and fictional) JSON object implementing all of the above mandatory f
       "contact":{
         "phone":"+31702127681",
         "twitter":"@revspacenl",
-        "ml":"general@revspace.nl"
+        "ml":"general@revspace.nl",
+        "email": "info@revspace.nl"
       },
-      "cam":"http:\/\/cam1.revspace.nl\/",
-      "logo":"https:\/\/revspace.nl\/mediawiki\/RevspaceLogoOnGreen.png",
-      "open":true,
-      "lastchange":1320586506,
+      "issue-report-channels" : [ "email", "ml" ],
+      "cam":["http://cam1.revspace.nl/"],
+      "logo":"https://revspace.nl/mediawiki/RevspaceLogoOnGreen.png",
+      "state" : {
+        "open":true,
+        "lastchange":1320586506
+      },
       "sensors":[
         {"temp":{"hacklab":"8.5C","handwerklokaal":"20.5C","lounge":"7.5C"}}
       ],
@@ -127,13 +133,15 @@ An example (and fictional) JSON object implementing all of the above mandatory f
         {"name":"calendar","type":"text/calendar","url":"https://revspace.nl/revspace.ical"}
       ],
       "events":[
-        {"name":"julian","type":"check-in","t":1320585844},
-        {"name":"zerocool","type":"check-in","t":1320536415},
-        {"name":"gmc","type":"check-in","t":1320534968},
-        {"name":"foobar","type":"check-in","t":1320528604}
+        {"name":"julian","type":"check-in","timestamp":1320585844},
+        {"name":"zerocool","type":"check-in","timestamp":1320536415},
+        {"name":"gmc","type":"check-in","timestamp":1320534968},
+        {"name":"foobar","type":"check-in","timestamp":1320528604}
       ],
-      "lat":4.336982,
-      "lon":52.069826
+      "location" : {
+        "lat":4.336982,
+        "lon":52.069826
+      }
     }
 
 Applications
