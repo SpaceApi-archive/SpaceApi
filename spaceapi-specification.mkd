@@ -72,7 +72,7 @@ The JSON object has these fields:
   * phone (string, optional) - phone number (in the form of +CCNNNNNNNNN, where CC is the countrycode);
   * sip (string, optional) - sip uri (eg. 'sip:gmc@pbx.sonologic.net'
   * keymaster (string or array of strings, optional) - phone number, or phone numbers of people able to open the space (for spaces where not all members can unlock the door
-  * irc (string, optional) - irc channel in the form of 'irc://freenode/#revspace';
+  * irc (string, optional) - irc channel in the form of 'irc://chat.freenode.net/#revspace';
   * twitter (string, optional) - twitter account in the form of '@brenno';
   * facebook (string, optional) - facebook account in the form of 'example', would format to 'http://facebook.com/example' when url-ized;
   * email (string, optional) - general email address;
@@ -86,6 +86,7 @@ The JSON object has these fields:
 * open (boolean, mandatory) - 'true' if the space is currently open, 'false' if not;
 * status (string, optional) - additional free-form string to specify the 'open' status (ie, 'open for public', 'members only', ...)
 * lastchange (long int, optional) - seconds since epoch of last change in the open field;
+* spacefed (boolean, optional) - is the space part of the [federated wifi authentication](http://spacefed.net)
 * events (array, optional) - array of recent check-in/check-outs or other relevant events the space wants to share (such as the fire-alarm).
   * Each entry in the events array has the following fields:
     * name (string, mandatory) - name or nickname of person or object associated with this event;
@@ -153,6 +154,7 @@ Changelog
 * added validator
 * add lat/lon floats to example
 * add link to new git location
+* added spacefed flag
 
 ### r0.12: #
 * added firefox extension
