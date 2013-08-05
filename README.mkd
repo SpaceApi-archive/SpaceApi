@@ -1,7 +1,7 @@
 SpaceApi
 ========
 
-*Note* This repository is obsolete since the formal specification was worked out in the OpenSpaceLint repository in March 2012.
+**Note:** This repository is obsolete since the formal specification was worked out in the OpenSpaceLint repository in March 2012.
 
 Canonical repository for the SpaceState API.
 
